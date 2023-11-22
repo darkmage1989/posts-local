@@ -1,10 +1,11 @@
-import { data } from "../../interfaces/dataInterface";
+import { data } from "../../../../interfaces/dataInterface";
 import style from './PaginationComponent.module.css'
 
 interface PaginationComponentProps {
   userCount: Array<data>;
   usersPerPage: number;
   paginate: (i: number) => void;
+  setUsersPerPage: (i: number) => void;
   currentPage: number;
 }
 
@@ -12,12 +13,12 @@ const PaginationComponent = ({
   userCount,
   usersPerPage,
   paginate,
+  setUsersPerPage,
   currentPage,
 }: PaginationComponentProps) => {
  const pageNumbers = []
  for (let i = 1; i<= Math.ceil(userCount.length/usersPerPage); i++ )
  pageNumbers.push(i)
-console.log(currentPage);
   return (
     <div className={style.pagination__box}>
       {pageNumbers.map((item)=> (<button key={item} onClick={()=> paginate(item)}>{item}</button>))}
