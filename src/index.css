@@ -1,13 +1,9 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body::-webkit-scrollbar {
+  display: none;
 }
+body{
+  background-image: url('https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2548.jpg?t=st=1696501955~exp=1696502555~hmac=d7e91b496cbb0fa641b31372951708120ba8afdd5c6e1e055eeb0d3d2d837159');
+  background-repeat: no-repeat;
+  background-size: cover;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

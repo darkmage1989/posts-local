@@ -1,0 +1,11 @@
+.not__found__box {
+    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("https://quasa.io/storage/images/news/1wy7s2BEZhuJaqYsay2yO8QkAYe76BvTD1K7A7Gt.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
