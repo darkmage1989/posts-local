@@ -19,6 +19,13 @@ export const dataApi = createApi({ //ртк запрос на апи
         };
       },
     }),
+    getCommentsApi: builder.query({
+      query: () => {
+        return {
+          url: `comments`,
+        };
+      },
+    }),
   }),
 });
-export const { useGetPostsApiQuery, useGetUsersApiQuery } = dataApi;
+export const { useGetPostsApiQuery, useGetUsersApiQuery, useGetCommentsApiQuery } = dataApi;

@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { dataApi } from "./apis/apis";
-import postsDataSlice from './slices/postsDataSlice'
-import usersDataSlice from './slices/usersDataSlice'
+import { dataApi } from "./apis/dataApi";
+import postsDataSlice from "./slices/postsDataSlice";
+import usersDataSlice from "./slices/usersDataSlice";
+import commentsDataSlice from './slices/commentsDataSlice'
 export const store = configureStore({
   reducer: {
     [dataApi.reducerPath]: dataApi.reducer,
     postsDataSlice,
-    usersDataSlice
+    usersDataSlice,
+    commentsDataSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(dataApi.middleware),

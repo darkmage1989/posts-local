@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { data } from "../../interfaces/dataInterface";
-import { useGetPostsApiQuery } from "../../redux/apis/apis";
+import { useGetPostsApiQuery } from "../../redux/apis/dataApi";
 
 const UserPage = () => {
   const navigate = useNavigate();

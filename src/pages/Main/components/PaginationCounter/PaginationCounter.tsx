@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { data } from "../../../../interfaces/dataInterface";
+import Button from "../../../../components/Button/Button";
 
 interface PaginationCounterProps {
   usersPerPage: number;
@@ -17,23 +18,30 @@ const PaginationCounter = ({
     openModal ? setOpenModal(false) : setOpenModal(true);
   }
   function countChange(event: ChangeEvent<HTMLInputElement>) {
-    const target = Number(event.target?.value)
+    const target = Number(event.target?.value);
     if (target <= data.length && target > 0) {
-        setUsersPerPage(target)
+      setUsersPerPage(target);
+      localStorage.setItem('usersPerPage', JSON.stringify(target))
     } else {
-        setUsersPerPage(data.length)
+      setUsersPerPage(data.length);
+      localStorage.setItem('usersPerPage', JSON.stringify(data.length))
     }
   }
   return (
     <div>
-      <button onClick={handleOpen}>{openModal ? 
-        'Скрыть'
-      : `posts per page ${usersPerPage}`}</button>
       {openModal ? (
+        <Button text={"Скрыть"} onClickHandler={handleOpen} />
+      ) : (
+        <Button
+          text={`сообщений на страницу ${usersPerPage} `}
+          onClickHandler={handleOpen}
+        />
+      )}
+      {openModal && (
         <div>
-          <input type="number" onInput={countChange} />
+          <input type="number" onChange={countChange} />
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

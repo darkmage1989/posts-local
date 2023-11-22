@@ -5,7 +5,6 @@ interface PaginationComponentProps {
   userCount: Array<data>;
   usersPerPage: number;
   paginate: (i: number) => void;
-  setUsersPerPage: (i: number) => void;
   currentPage: number;
 }
 
@@ -13,7 +12,6 @@ const PaginationComponent = ({
   userCount,
   usersPerPage,
   paginate,
-  setUsersPerPage,
   currentPage,
 }: PaginationComponentProps) => {
  const pageNumbers = []
