@@ -50,7 +50,6 @@ const Posts = () => {
     dispatch(setCommentsData(commentsData));
   }, [postsLoading, usersLoading, commentsLoading, dispatch, postsData, usersData, commentsData]);
 
-  console.log(postsDataLocal);
   if (postsLoading || usersLoading || commentsLoading) {
     return <span>Загрузка</span>;
   }
@@ -62,7 +61,6 @@ const Posts = () => {
     return <p>No users</p>;
   }
   const currentPost: any = postsDataLocal.slice(firstPage, lastPage);
-  console.log(postsDataLocal);
   return (
     <>
       <PaginationCounter

@@ -28,7 +28,6 @@ const UserPage = () => {
   const userPage: Post = data.find(
     (user: Post) => user.id === Number(params.id)
   );
-  console.log(userPage);
   return <div>{userPage.id}</div>;
 };
 
