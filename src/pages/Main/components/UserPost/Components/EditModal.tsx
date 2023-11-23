@@ -1,11 +1,15 @@
 import { useState } from "react";
 import Button from "../../../../../components/Button/Button";
+import { useDispatch } from "react-redux";
+import { editPost } from "../../../../../redux/slices/postsDataSlice";
+import { editUser } from "../../../../../redux/slices/usersDataSlice";
 
 interface EditModalProps {
   id: number;
   title: string;
-  name?: string;
+  name: string;
   body: string;
+  userId: number
   setOpenModalEdit: (i: boolean) => void;
 }
 
@@ -14,8 +18,10 @@ const EditModal = ({
   title,
   name,
   body,
+  userId,
   setOpenModalEdit,
 }: EditModalProps) => {
+  const dispatch = useDispatch()
   const [editTitle, setEditTitle] = useState(title);
   const [editName, setEditName] = useState(name);
   const [editBody, setEditBody] = useState(body);
@@ -26,6 +32,8 @@ const EditModal = ({
   }
   function ConfirmEdit() {
     setOpenModalEdit(false);
+    dispatch(editPost({id, title: editTitle, body: editBody}))
+    dispatch(editUser({userId, name: editName}))
   }
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>

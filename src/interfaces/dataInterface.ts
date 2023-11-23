@@ -2,7 +2,7 @@ export interface Post {
   body: string;
   id: number;
   title: string;
-  userId: number;
+  userId: number ;
 }
 export interface Comments {
   postId: number;
@@ -16,4 +16,13 @@ export interface Users {
   name: string;
   username: string;
   email: string;
+}
+export interface EditPost {
+  body: string;
+  id: number;
+  title: string;
+}
+export interface EditName {
+  name: string;
+  userId: number;
 }

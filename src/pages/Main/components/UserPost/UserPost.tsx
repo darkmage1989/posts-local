@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../../../../components/Button/Button";
 import { useState } from "react";
 import { RootState } from "../../../../redux/store";
 import { deletePost } from "../../../../redux/slices/postsDataSlice";
@@ -37,7 +36,7 @@ const UserPost = ({ title, body, userId, id }: UserPostProps) => {
   function handleDelete() {
     dispatch(deletePost(id));
   }
-  const user = userData?.find((item) => item.id === userId);
+  const user = userData?.find((item) => item.id === userId)!;
   const comments = commentsData
     ?.map((item) => {
       return item.postId === id ? item : null;
@@ -53,7 +52,7 @@ const UserPost = ({ title, body, userId, id }: UserPostProps) => {
           </div>
           <h4>{user?.name}</h4>
           <span>{body}</span>
-          {openModalEdit && <EditModal setOpenModalEdit={setOpenModalEdit} id={id} title={title} name={user?.name} body={body}/>}
+          {openModalEdit && <EditModal setOpenModalEdit={setOpenModalEdit} userId={userId} id={id} title={title} name={user.name} body={body}/>}
         </div>
         <div>
           {openModalComments ? (

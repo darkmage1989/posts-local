@@ -14,7 +14,7 @@ const PaginationComponent = ({
   currentPage,
 }: PaginationComponentProps) => {
  const pageNumbers = []
- for (let i = 1; i<= Math.ceil(userCount.length/usersPerPage); i++ )
+ for (let i = 1; i<= Math.ceil(userCount?.length/usersPerPage); i++ )
  pageNumbers.push(i)
   return (
     <div className={style.pagination__box}>

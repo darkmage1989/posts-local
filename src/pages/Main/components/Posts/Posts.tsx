@@ -60,7 +60,7 @@ const Posts = () => {
   if (isEmptyList) {
     return <p>No users</p>;
   }
-  const currentPost: any = postsDataLocal.slice(firstPage, lastPage);
+  const currentPost: Array<Post> = postsDataLocal?.slice(firstPage, lastPage);
   return (
     <>
       <PaginationCounter
@@ -75,7 +75,7 @@ const Posts = () => {
         userCount={postsDataLocal}
       />
       <div className={style.user__box}>
-        {currentPost.map((post: Post) => (
+        {currentPost?.map((post: Post) => (
           <UserPost
             key={post.id}
             id={post.id}
