@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { data } from "../../interfaces/dataInterface";
+import { Post } from "../../interfaces/dataInterface";
 import { useGetPostsApiQuery } from "../../redux/apis/dataApi";
 
 const UserPage = () => {
@@ -25,8 +25,8 @@ const UserPage = () => {
       return <div>{error.message}</div>;
     }
   }
-  const userPage: data = data.find(
-    (user: data) => user.id === Number(params.id)
+  const userPage: Post = data.find(
+    (user: Post) => user.id === Number(params.id)
   );
   console.log(userPage);
   return <div>{userPage.id}</div>;

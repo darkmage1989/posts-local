@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from "react";
-import { data } from "../../../../interfaces/dataInterface";
+import { Post } from "../../../../interfaces/dataInterface";
 import Button from "../../../../components/Button/Button";
 
 interface PaginationCounterProps {
   usersPerPage: number;
   setUsersPerPage: (i: number) => void;
-  data: Array<data>;
+  data: Array<Post>;
 }
 
 const PaginationCounter = ({

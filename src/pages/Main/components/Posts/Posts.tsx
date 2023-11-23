@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { data } from "../../../../interfaces/dataInterface";
+import { Post } from "../../../../interfaces/dataInterface";
 import {
   useGetCommentsApiQuery,
   useGetPostsApiQuery,
@@ -18,7 +18,11 @@ const Posts = () => {
     data: postsData,
     error: postsError,
     isLoading: postsLoading,
-  } = useGetPostsApiQuery(null);
+  } = useGetPostsApiQuery(null) as {
+    data: Array<Post>;
+    error: unknown;
+    isLoading: boolean;
+  };
   const {
     data: usersData,
     error: usersError,
@@ -37,14 +41,16 @@ const Posts = () => {
   const lastPage = currentPage * usersPerPage;
   const firstPage = lastPage - usersPerPage;
   const dispatch = useDispatch();
+  const postsDataLocal: Array<Post> = useSelector(
+    (state: any) => state.postsDataSlice.postsData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
+  );
   useEffect(() => {
     dispatch(setPostsData(postsData));
     dispatch(setUsersData(usersData));
     dispatch(setCommentsData(commentsData));
-  });
-  const postsDataLocal = useSelector(
-    (state: any) => state.postsDataSlice.postsData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
-  );
+  }, [postsLoading, usersLoading, commentsLoading, dispatch, postsData, usersData, commentsData]);
+
+  console.log(postsDataLocal);
   if (postsLoading || usersLoading || commentsLoading) {
     return <span>Загрузка</span>;
   }
@@ -55,25 +61,23 @@ const Posts = () => {
   if (isEmptyList) {
     return <p>No users</p>;
   }
-
-  const currentPost: any = postsDataLocal.slice(firstPage, lastPage)
-  console.log(currentPost);
-  // postsData.slice(firstPage, lastPage);
+  const currentPost: any = postsDataLocal.slice(firstPage, lastPage);
+  console.log(postsDataLocal);
   return (
     <>
       <PaginationCounter
         usersPerPage={usersPerPage}
         setUsersPerPage={setUsersPerPage}
-        data={postsData}
+        data={postsDataLocal}
       />
       <PaginationComponent
         currentPage={currentPage}
         paginate={setCurrentPage}
         usersPerPage={usersPerPage}
-        userCount={postsData}
+        userCount={postsDataLocal}
       />
       <div className={style.user__box}>
-        {currentPost.map((post: data) => (
+        {currentPost.map((post: Post) => (
           <UserPost
             key={post.id}
             id={post.id}

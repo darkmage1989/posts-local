@@ -31,7 +31,7 @@ const UserPost = ({ title, body, userId, id }: UserPostProps) => {
       <div>
         <div>
           <h3>{title}</h3>
-          {/* <h4>{userData && userData[userId - 1].name}</h4> */}
+          <h4>{userData && userData[userId - 1].name}</h4>
           <span>{body}</span>
         </div>
         {openModal ? (

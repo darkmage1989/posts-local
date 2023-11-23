@@ -1,13 +1,12 @@
-import { data } from "../../../../interfaces/dataInterface";
+import { Post } from "../../../../interfaces/dataInterface";
 import style from './PaginationComponent.module.css'
 
 interface PaginationComponentProps {
-  userCount: Array<data>;
+  userCount: Array<Post>;
   usersPerPage: number;
   paginate: (i: number) => void;
   currentPage: number;
 }
-
 const PaginationComponent = ({
   userCount,
   usersPerPage,
