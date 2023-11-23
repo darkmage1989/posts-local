@@ -1,5 +1,5 @@
 interface ButtonProps {
-  onClickHandler: any;
+  onClickHandler: ()=> void;
   text: string | number;
 }
 
