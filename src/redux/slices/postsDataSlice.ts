@@ -35,8 +35,17 @@ const postsDataSlice = createSlice({
         return item;
       });
     },
+    setFavorite: (state, actions) => {
+      state.postsData = state.postsData.map((item) => {
+        if (item.id === actions.payload.id) {
+          item.favorite = actions.payload.favorite;
+          return item;
+        }
+        return item;
+      });
+    },
   },
 });
-export const { setPostsData, deletePost, editPost, addAuthor } =
+export const { setPostsData, deletePost, editPost, addAuthor, setFavorite } =
   postsDataSlice.actions;
 export default postsDataSlice.reducer;

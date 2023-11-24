@@ -83,6 +83,7 @@ const Posts = () => {
             body={post.body}
             userId={post.userId}
             name={post.name}
+            favorite={post.favorite}
           />
         ))}
       </div>

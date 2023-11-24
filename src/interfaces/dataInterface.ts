@@ -4,6 +4,7 @@ export interface Post {
   title: string;
   userId: number ;
   name: string;
+  favorite: boolean;
 }
 export interface Comments {
   postId: number;

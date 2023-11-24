@@ -8,7 +8,6 @@ interface EditModalProps {
   title: string;
   name: string;
   body: string;
-  userId: number
   setOpenModalEdit: (i: boolean) => void;
 }
 
@@ -17,7 +16,6 @@ const EditModal = ({
   title,
   name,
   body,
-  userId,
   setOpenModalEdit,
 }: EditModalProps) => {
   const dispatch = useDispatch()
@@ -25,6 +23,7 @@ const EditModal = ({
   const [editName, setEditName] = useState(name);
   const [editBody, setEditBody] = useState(body);
   function CanelEdit() {
+    setOpenModalEdit(false);
     setEditTitle(title);
     setEditName(name);
     setEditBody(body);
