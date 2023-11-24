@@ -20,6 +20,7 @@ import { setCommentsData } from "../../../../redux/slices/commentsDataSlice";
 import Confirm from "../../../../components/Confirm/Confirm";
 import FavoriteIcon from "../../../../components/FavoriteIcon/FavoriteIcon";
 import DeleteIcon from "../../../../components/DeleteIcon/DeleteIcon";
+import Filters from "../../../../components/Filters/Filters";
 const Posts = () => {
   const {
     data: postsData,
@@ -118,6 +119,7 @@ const Posts = () => {
         setUsersPerPage={setUsersPerPage}
         data={postsDataLocal}
       />
+      <Filters/>
       <PaginationComponent
         currentPage={currentPage}
         paginate={setCurrentPage}
