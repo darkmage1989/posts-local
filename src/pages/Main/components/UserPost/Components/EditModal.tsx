@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "../../../../../components/Button/Button";
 import { useDispatch } from "react-redux";
 import { editPost } from "../../../../../redux/slices/postsDataSlice";
-import { editUser } from "../../../../../redux/slices/usersDataSlice";
 
 interface EditModalProps {
   id: number;
@@ -32,8 +31,7 @@ const EditModal = ({
   }
   function ConfirmEdit() {
     setOpenModalEdit(false);
-    dispatch(editPost({id, title: editTitle, body: editBody}))
-    dispatch(editUser({userId, name: editName}))
+    dispatch(editPost({id, title: editTitle, body: editBody, name: editName}))
   }
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>

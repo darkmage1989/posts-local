@@ -3,6 +3,7 @@ export interface Post {
   id: number;
   title: string;
   userId: number ;
+  name: string;
 }
 export interface Comments {
   postId: number;
@@ -21,6 +22,7 @@ export interface EditPost {
   body: string;
   id: number;
   title: string;
+  name: string
 }
 export interface EditName {
   name: string;

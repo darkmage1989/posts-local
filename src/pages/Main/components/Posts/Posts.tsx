@@ -82,6 +82,7 @@ const Posts = () => {
             title={post.title}
             body={post.body}
             userId={post.userId}
+            name={post.name}
           />
         ))}
       </div>

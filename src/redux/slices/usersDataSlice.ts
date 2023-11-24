@@ -11,16 +11,7 @@ const usersDataSlice = createSlice({
     setUsersData: (state, actions) => {
       state.usersData = actions.payload;
     },
-    editUser: (state, actions: PayloadAction <EditName>) => {
-      state.usersData = state.usersData.map((item) => {
-        if (item.id === actions.payload.userId) {
-          item.name = actions.payload.name
-          return item
-        }
-        return item
-      })
-    },
   },
 });
-export const { setUsersData, editUser } = usersDataSlice.actions;
+export const { setUsersData } = usersDataSlice.actions;
 export default usersDataSlice.reducer;
