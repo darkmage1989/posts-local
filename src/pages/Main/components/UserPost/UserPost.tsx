@@ -47,12 +47,8 @@ const UserPost = ({
   const commentsData: Array<Comments> = useSelector(
     (state: any) => state.commentsDataSlice.commentsData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
   );
-  const user = userData?.find((item) => item.id === userId)!;
-  useEffect(() => {
-    if (!name) {
-      dispatch(addAuthor({ id, name: user?.name }));
-    }
-  }, [dispatch, id, user, name]);
+ 
+
 
   function handleDelete() {
     dispatch(deletePost(id));

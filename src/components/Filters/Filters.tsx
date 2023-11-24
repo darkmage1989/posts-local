@@ -14,7 +14,7 @@ const Filters = () => {
         <option value="false">избранные</option>
       </select>
       <select name="name">
-      {Array.from(new Set(postsDataLocal?.map((item) => item.name))).map(
+      {Array.from(new Set(postsDataLocal?.map((item) => item.name ))).map(
           (name, index) => (
             <option key={index} value={name}>
               {name}

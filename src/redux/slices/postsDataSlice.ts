@@ -11,8 +11,8 @@ const postsDataSlice = createSlice({
       state.postsData = actions.payload;
     },
     addAuthor: (state, actions) => {
-      state.postsData = state.postsData.map((item) => {
-        if (item.id === actions.payload.id) {
+      state.postsData = state.postsData?.map((item) => {
+        if (item.userId === actions.payload.id) {
           item.name = actions.payload.name;
           return item;
         }

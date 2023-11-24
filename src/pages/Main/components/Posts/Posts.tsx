@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Post } from "../../../../interfaces/dataInterface";
+import { Post, Users } from "../../../../interfaces/dataInterface";
 import {
   useGetCommentsApiQuery,
   useGetPostsApiQuery,
@@ -11,6 +11,7 @@ import style from "./Posts.module.css";
 import PaginationCounter from "../PaginationCounter/PaginationCounter";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addAuthor,
   deletePost,
   setFavorite,
   setPostsData,
@@ -35,7 +36,11 @@ const Posts = () => {
     data: usersData,
     error: usersError,
     isLoading: usersLoading,
-  } = useGetUsersApiQuery(null);
+  } = useGetUsersApiQuery(null) as {
+    data: Array<Users>;
+    error: unknown;
+    isLoading: boolean;
+  };;
   const {
     data: commentsData,
     error: commentsError,
@@ -54,6 +59,10 @@ const Posts = () => {
   const postsDataLocal: Array<Post> = useSelector(
     (state: any) => state.postsDataSlice.postsData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
   );
+  const usersDataLocal: Array<Users> = useSelector(
+    (state: any) => state.usersDataSlice.usersData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
+  );
+  
   useEffect(() => {
     dispatch(setPostsData(postsData));
     dispatch(setUsersData(usersData));
@@ -67,7 +76,13 @@ const Posts = () => {
     usersData,
     commentsData,
   ]);
-
+  useEffect(() => {
+    usersDataLocal?.forEach((item) => {
+      dispatch(addAuthor({ id: item?.id, name: item?.name }));
+    });
+  }, [dispatch, usersDataLocal, postsLoading,
+    usersLoading,
+    commentsLoading,]);
   if (postsLoading || usersLoading || commentsLoading) {
     return <span>Загрузка</span>;
   }
@@ -119,7 +134,7 @@ const Posts = () => {
         setUsersPerPage={setUsersPerPage}
         data={postsDataLocal}
       />
-      <Filters/>
+      <Filters />
       <PaginationComponent
         currentPage={currentPage}
         paginate={setCurrentPage}
@@ -127,7 +142,7 @@ const Posts = () => {
         userCount={postsDataLocal}
       />
       {selectedPosts.length !== 0 && (
-        <div style={{display:'flex', textAlign:'center'}}>
+        <div style={{ display: "flex", textAlign: "center" }}>
           <div>
             <label style={{ display: "block" }}>Добавить в избранное</label>
             <FavoriteIcon
