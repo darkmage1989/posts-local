@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { EditName, Users } from "../../interfaces/dataInterface";
+import { createSlice } from "@reduxjs/toolkit";
+import { Users } from "../../interfaces/dataInterface";
 
 
 const usersDataSlice = createSlice({

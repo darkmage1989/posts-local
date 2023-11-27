@@ -8,7 +8,7 @@ const FavoriteIcon = ({ onClickHandler, fill}: FavoriteIconProps) => {
     <svg
       onClick={onClickHandler}
       style={{ height: "50px", width: "50px" }}
-      enable-background="new 0 0 12 12"
+      enableBackground="new 0 0 12 12"
       id="Слой_1"
       version="1.1"
       viewBox="0 0 12 12"

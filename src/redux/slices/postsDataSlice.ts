@@ -5,6 +5,7 @@ const postsDataSlice = createSlice({
   name: "postsDataSlice",
   initialState: {
     postsData: [] as Array<Post>,
+    filteredData: [] as Array<Post>,
   },
   reducers: {
     setPostsData: (state, actions) => {
@@ -29,7 +30,7 @@ const postsDataSlice = createSlice({
         if (item.id === actions.payload.id) {
           item.title = actions.payload.title;
           item.body = actions.payload.body;
-          item.name = actions.payload.name
+          item.name = actions.payload.name;
           return item;
         }
         return item;
@@ -44,8 +45,20 @@ const postsDataSlice = createSlice({
         return item;
       });
     },
+    setFilteredData: (state, actions) => {
+      state.filteredData = state.postsData.filter(
+        (item) => item.name === actions.payload
+      );
+      console.log(actions.payload);
+    },
   },
 });
-export const { setPostsData, deletePost, editPost, addAuthor, setFavorite } =
-  postsDataSlice.actions;
+export const {
+  setPostsData,
+  deletePost,
+  editPost,
+  addAuthor,
+  setFavorite,
+  setFilteredData,
+} = postsDataSlice.actions;
 export default postsDataSlice.reducer;

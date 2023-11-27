@@ -23,16 +23,16 @@ const CommentIcon = ({ onClickHandler }: PropsCommentIcon) => {
           id="radialGradient-1"
           r="87.8884669%"
         >
-          <stop offset="0%" stop-color="#5C79E5" />
-          <stop offset="100%" stop-color="#3F59CD" />
+          <stop offset="0%" stopColor="#5C79E5" />
+          <stop offset="100%" stopColor="#3F59CD" />
         </radialGradient>
       </defs>
       <g
         fill="none"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         id="Page-1"
         stroke="none"
-        stroke-width="1"
+        strokeWidth="1"
       >
         <g id="Artboard" transform="translate(-1563.000000, -153.000000)">
           <g

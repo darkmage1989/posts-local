@@ -22,6 +22,7 @@ import Confirm from "../../../../components/Confirm/Confirm";
 import FavoriteIcon from "../../../../components/FavoriteIcon/FavoriteIcon";
 import DeleteIcon from "../../../../components/DeleteIcon/DeleteIcon";
 import Filters from "../../../../components/Filters/Filters";
+import { RootState } from "../../../../redux/store";
 const Posts = () => {
   const {
     data: postsData,
@@ -40,7 +41,7 @@ const Posts = () => {
     data: Array<Users>;
     error: unknown;
     isLoading: boolean;
-  };;
+  };
   const {
     data: commentsData,
     error: commentsError,
@@ -56,13 +57,21 @@ const Posts = () => {
   const lastPage = currentPage * usersPerPage;
   const firstPage = lastPage - usersPerPage;
   const dispatch = useDispatch();
-  const postsDataLocal: Array<Post> = useSelector(
-    (state: any) => state.postsDataSlice.postsData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
-  );
+  const postDataObj = {
+    posts: useSelector(
+      (state: RootState) => state.postsDataSlice.postsData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
+    ),
+    filtered: useSelector(
+      (state: RootState) => state.postsDataSlice.filteredData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
+    ),
+  };
+  const postsDataLocal = postDataObj.filtered.length
+    ? postDataObj.filtered
+    : postDataObj.posts;
   const usersDataLocal: Array<Users> = useSelector(
     (state: any) => state.usersDataSlice.usersData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
   );
-  
+
   useEffect(() => {
     dispatch(setPostsData(postsData));
     dispatch(setUsersData(usersData));
@@ -80,9 +89,7 @@ const Posts = () => {
     usersDataLocal?.forEach((item) => {
       dispatch(addAuthor({ id: item?.id, name: item?.name }));
     });
-  }, [dispatch, usersDataLocal, postsLoading,
-    usersLoading,
-    commentsLoading,]);
+  }, [dispatch, usersDataLocal, postsLoading, usersLoading, commentsLoading]);
   if (postsLoading || usersLoading || commentsLoading) {
     return <span>Загрузка</span>;
   }
@@ -175,7 +182,7 @@ const Posts = () => {
       )}
       <div className={style.user__box}>
         {currentPost?.map((post: Post) => (
-          <div style={{ display: "flex" }}>
+          <div key={post.id} style={{ display: "flex" }}>
             <input
               id={String(post.id)}
               type="checkbox"

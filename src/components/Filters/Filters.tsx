@@ -1,20 +1,26 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Post } from "../../interfaces/dataInterface";
+import { setFilteredData } from "../../redux/slices/postsDataSlice";
 
 const Filters = () => {
-  const [filter, setFilter] = useState("");
+  const dispatch = useDispatch();
+  const [sort, setSort] = useState("");
   const postsDataLocal: Array<Post> = useSelector(
     (state: any) => state.postsDataSlice.postsData // НУЖНО ЗАТИПИЗИРОВАТЬ НЕ ЗАБЫТЬ!!!
   );
+  function handelFilter(e: React.ChangeEvent<HTMLSelectElement>) {
+      dispatch(setFilteredData(e.target.value));
+  }
   return (
     <div>
-      <select name="title">
-      <option value="true">все посты</option>
+      <select onChange={handelFilter} name="title">
+        <option value="true">все посты</option>
         <option value="false">избранные</option>
       </select>
-      <select name="name">
-      {Array.from(new Set(postsDataLocal?.map((item) => item.name ))).map(
+      <select onChange={handelFilter} name="name">
+        <option value="all">Все</option>
+        {Array.from(new Set(postsDataLocal?.map((item) => item.name))).map(
           (name, index) => (
             <option key={index} value={name}>
               {name}
