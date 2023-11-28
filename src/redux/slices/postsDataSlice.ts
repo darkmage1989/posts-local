@@ -6,6 +6,10 @@ const postsDataSlice = createSlice({
   initialState: {
     postsData: [] as Array<Post>,
     filteredData: [] as Array<Post>,
+    dataSort: {
+      name: "",
+      value: "",
+    },
   },
   reducers: {
     setPostsData: (state, actions) => {
@@ -49,7 +53,55 @@ const postsDataSlice = createSlice({
       state.filteredData = state.postsData.filter(
         (item) => item.name === actions.payload
       );
-      console.log(actions.payload);
+    },
+    setSort: (state, actions) => {
+      state.dataSort = actions.payload;
+      const sortData = state.filteredData.length? state.filteredData : state.postsData
+      const actionKey: string = actions.payload.name;
+      if (state.dataSort.value === "max") {
+        sortData.sort((a: Post, b: Post) => {
+          if (a[actionKey as keyof Post] > b[actionKey as keyof Post]) {
+            return -1;
+          } else if (a[actionKey as keyof Post] < b[actionKey as keyof Post]) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      }
+      if (state.dataSort.value === "min") {
+        sortData.sort((a: Post, b: Post) => {
+          if (a[actionKey as keyof Post] > b[actionKey as keyof Post]) {
+            return 1;
+          } else if (a[actionKey as keyof Post] < b[actionKey as keyof Post]) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+      }
+      if (state.dataSort.value === "true") {
+        sortData.sort((a: Post, b: Post) => {
+          if (a[actionKey as keyof Post] === b[actionKey as keyof Post]) {
+            return 0;
+          } else if (a[actionKey as keyof Post]) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+      }
+      if (state.dataSort.value === "false") {
+        sortData.sort((a: Post, b: Post) => {
+          if (a[actionKey as keyof Post] === b[actionKey as keyof Post]) {
+            return 0;
+          } else if (a[actionKey as keyof Post]) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      }
     },
   },
 });
@@ -60,5 +112,6 @@ export const {
   addAuthor,
   setFavorite,
   setFilteredData,
+  setSort,
 } = postsDataSlice.actions;
 export default postsDataSlice.reducer;
